@@ -12,6 +12,7 @@ public class Plugin : BaseUnityPlugin
 {
     internal static new ManualLogSource Logger;
     Harmony HarInstance;
+    public static List<EnemyAI> EnemyAIList = new();
     private void Awake()
     {
         Logger = base.Logger;
@@ -22,22 +23,39 @@ public class Plugin : BaseUnityPlugin
     [HarmonyPatch(typeof(StartOfRound), "SetPlayerSafeInShip")]
     [HarmonyPriority(Priority.Last)]
     [HarmonyPrefix]
-    static bool Prefix(StartOfRound __instance)
+    static void Prefix(StartOfRound __instance, ref bool __runOriginal)
     {
+        if (!__runOriginal)
+            return;
+        __runOriginal = false;
         if (GameNetworkManager.Instance == null || (UnityEngine.Object)(object)GameNetworkManager.Instance.localPlayerController == null)
-            return false;
+            return;
         PlayerControllerB playerControllerB = GameNetworkManager.Instance.localPlayerController;
         if (playerControllerB.isPlayerDead && (UnityEngine.Object)(object)playerControllerB.spectatedPlayerScript != null)
             playerControllerB = playerControllerB.spectatedPlayerScript;
-        List<EnemyAI> allEnemies = EnemyAI._allEnemies;
+        List<EnemyAI> allEnemies = EnemyAIList;
         if (__instance.hangarDoorsClosed && GameNetworkManager.Instance.localPlayerController.isInHangarShipRoom)
         {
             for (int i = 0; i < allEnemies.Count; i++)
                 allEnemies[i].EnableEnemyMesh(allEnemies[i].isInsidePlayerShip);
-            return false;
+            return;
         }
         for (int j = 0; j < allEnemies.Count; j++)
             allEnemies[j].EnableEnemyMesh(true);
-        return false;
+    }
+    [HarmonyPatch(typeof(EnemyAI), "Start")]
+    [HarmonyPriority(Priority.First)]
+    [HarmonyPostfix]
+    static void PostFix(EnemyAI __instance)
+    {
+        if (!EnemyAIList.Contains(__instance))
+            EnemyAIList.Add(__instance);
+    }
+    [HarmonyPatch(typeof(EnemyAI), "OnDestroy")]
+    [HarmonyPriority(Priority.First)]
+    [HarmonyPrefix]
+    static void Prefix1(EnemyAI __instance)
+    {
+        EnemyAIList.Remove(__instance);
     }
 }

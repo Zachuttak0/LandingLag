@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net46</TargetFramework>
     <AssemblyName>NoLoadLagLethal</AssemblyName>
     <Product>No Load Lag Lethal</Product>
     <Version>1.0.0</Version>
@@ -28,6 +28,7 @@
   
   <ItemGroup>
     <Reference Include="Assembly-CSharp" HintPath="$(LETHAL_REFERENCES)\Assembly-CSharp.dll" />
+    <Reference Include="netstandard" HintPath="$(LETHAL_REFERENCES)\netstandard.dll" />
     <Reference Include="Unity.Netcode.Runtime" HintPath="$(LETHAL_REFERENCES)\Unity.Netcode.Runtime.dll" />
   </ItemGroup>
 </Project>
