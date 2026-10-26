@@ -10,4 +10,4 @@ What it does
 
 Results may vary depending on your PC and mod setup.
 Credit to [Zereth](https://github.com/o5zereth) for original idea and version.
-<sub>(yes this mod used to be called NoLoadLagLethal, name changed to not sound ai generated, cuz this is human made)</sub>
+<sup><sub>(yes this mod used to be called NoLoadLagLethal, name changed to not sound ai generated, cuz this is human made)</sub></sup>
