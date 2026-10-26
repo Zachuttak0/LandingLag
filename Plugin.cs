@@ -31,7 +31,7 @@ public class Plugin : BaseUnityPlugin
         if (original == null || replacement == null)
             return codes;
         for (int i = 0; i < codes.Count; i++)
-            if (codes[i].Calls(original)
+            if (codes[i].Calls(original))
                 codes[i] = new CodeInstruction(OpCodes.Call, replacement);
         return codes;
     }
