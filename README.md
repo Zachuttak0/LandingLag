@@ -15,3 +15,5 @@ Results may vary depending on your PC and mod setup.
 Credit to [Zereth](https://github.com/o5zereth) for original idea and version.
 
 <sup><sub>(yes this mod used to be called NoLoadLagLethal, name changed to not sound ai generated, cuz this is human made)</sub></sup>
+
+<sup><sub>(me when I realize there is a more popular mod that does the same thing mine does but also more that is more popular and older)</sub></sup>
